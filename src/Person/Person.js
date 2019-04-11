@@ -1,16 +1,17 @@
-import React from 'react';
-import './Person.css';
+import React from "react";
+import Radium from "radium";
+import "./Person.css";
 
-const person = (props) => {
-	return (
-		<div className="Person">
-			<p onClick={props.click}>
-				Hi, I am {props.name}. I am {props.age} years old! {props.hobby}
-			</p>
-			<p>{props.children}</p>
-			<input type="txt" onChange={props.change} value={props.name} />
-		</div>
-	);
+const person = props => {
+  return (
+    <div className="Person">
+      <p onClick={props.click}>
+        Hi, I am {props.name}. I am {props.age} years old! {props.hobby}
+      </p>
+      <p>{props.children}</p>
+      <input type="txt" onChange={props.change} value={props.name} />
+    </div>
+  );
 };
 
-export default person;
+export default Radium(person);
