@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 import Person from "./Person/Person";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 class App extends Component {
   state = {
@@ -64,13 +65,15 @@ class App extends Component {
         <div>
           {this.state.person.map((person, index) => {
             return (
-              <Person
-                click={() => this.deleteNameHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                change={event => this.changeNameHandler(event, person.id)}
-              />
+              <ErrorBoundary>
+                <Person
+                  click={() => this.deleteNameHandler(index)}
+                  name={person.name}
+                  age={person.age}
+                  key={person.id}
+                  change={event => this.changeNameHandler(event, person.id)}
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
@@ -78,20 +81,18 @@ class App extends Component {
       style.backgroundColor = "red";
     }
 
-    let classes = [];
+    let classesHandler = [];
     if (this.state.person.length <= 2) {
-      classes.push("red");
+      classesHandler.push(classes.red);
     }
     if (this.state.person.length <= 1) {
-      classes.push("bold");
+      classesHandler.push(classes.bold);
     }
 
-    console.log(classes.join(" "));
-
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I am Ankit</h1>
-        <p className={classes.join(" ")}>Work is comfirtable.</p>
+        <p className={classesHandler.join(" ")}>Work is comfirtable.</p>
         <button style={style} onClick={this.toggelNameHandler}>
           Switch Person
         </button>
